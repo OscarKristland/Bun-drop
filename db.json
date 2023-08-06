@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Månadens burgare",
+      "price": 20,
+      "image": "burger-1.png",
+      "description": "En speciell burgare för varje månad. Smakupplevelsen varierar varje gång!"
+    },
+    {
+      "id": 2,
+      "name": "Original",
+      "price": 25,
+      "image": "burger-2.png",
+      "description": "En klassisk och saftig hamburgare med en perfekt blandning av kött och kryddor."
+    },
+    {
+      "id": 3,
+      "name": "Cheeseburgare",
+      "price": 20,
+      "image": "burger-3.png",
+      "description": "En läcker hamburgare med smält ost på en saftig köttbiff. En favorit för ostälskare!"
+    },
+    {
+      "id": 4,
+      "name": "Smokey",
+      "price": 25,
+      "image": "burger-4.png",
+      "description": "En rökig och smakrik burgare med en hint av grillat bacon. Perfekt för BBQ-älskare!"
+    },
+    {
+      "id": 5,
+      "name": "Blue Cheese",
+      "price": 20,
+      "image": "burger-5.png",
+      "description": "En smakexplosion med krämig blåmögelost och saftig köttbiff. En gourmetburgare!"
+    },
+    {
+      "id": 6,
+      "name": "Chili Sensation",
+      "price": 25,
+      "image": "burger-6.png",
+      "description": "En het och kryddig burgare med chili och jalapeños. För dig som älskar lite extra hetta!"
+    },
+    {
+      "id": 7,
+      "name": "Vegansk Original",
+      "price": 20,
+      "image": "burger-7.png",
+      "description": "En läcker vegansk burgare med smakfulla växtbaserade ingredienser. Vår veganska twist på en klassiker!"
+    },
+    {
+      "id": 8,
+      "name": "Vegansk Cheeseburgare",
+      "price": 25,
+      "image": "burger-8.png",
+      "description": "En smakrik vegansk burgare med veganost på en saftig växtbaserad biff. Perfekt för veganska burgarälskare!"
+    },
+    {
+      "id": 101,
+      "name": "Pommes",
+      "price": 20,
+      "image": "fries-1.png"
+    },
+    {
+      "id": 102,
+      "name": "Sötpotatispommes",
+      "price": 25,
+      "image": "fries-2.png"
+    },
+    {
+      "id": 201,
+      "name": "Cola",
+      "price": 20,
+      "image": "soda-1.png"
+    },
+    {
+      "id": 202,
+      "name": "Pepsi",
+      "price": 20,
+      "image": "soda-2.png"
+    }
+  ]
+}
