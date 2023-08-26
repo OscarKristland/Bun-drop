@@ -7,8 +7,6 @@ function Product(){
     const {productId} = useParams();
     const [product, setProduct] = useState({});
 
-    function log(){
-    };
 
     useEffect(() => {
     fetch(`http://localhost:7000/products/${productId}`)
@@ -18,7 +16,7 @@ function Product(){
 
     return (
         <div className="card">
-            <img src={product.image}/>
+            <img src={product.image} alt="Fan" />
             <h1>{product.name}</h1>
             <em>{product.price}</em>
             <p>{product.description}</p>

@@ -27,6 +27,7 @@ function Menu() {
                         name={p.name}
                         price={p.price}
                         description={p.description}
+                        image={p.image}
                         id={p.id}
                     />
                 ))}

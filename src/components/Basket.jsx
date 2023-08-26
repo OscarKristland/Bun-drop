@@ -1,63 +1,10 @@
-// import BasketItem from './BasketItem';
-// import { Link } from 'react-router-dom';
-// import { useState, useEffect } from 'react';
-// import LocalStorage from './LocalStorage';
-
-// function Basket() {
-//   const [basket, setBasket] = LocalStorage();
-//   const [totalPrice, setTotalPrice] = useState(0);
-
-//   useEffect(() => {
-//     const calculateTotalPrice = () => {
-//       let total = 0;
-//       basket.forEach((p) => {
-//         total += p.price * p.quantity;
-//       });
-//       setTotalPrice(total);
-//     };
-
-//     calculateTotalPrice();
-//   }, [basket]);
-
-//   if (basket.length > 0) {
-//     return (
-//       <div>
-//         <h1>Basket</h1>
-//         <div className='product-container'>
-//           {basket.map((p) => (
-//             <BasketItem
-//               key={p.name}
-//               name={p.name}
-//               price={p.price}
-//               quantity={p.quantity}
-//             />
-//           ))}
-//         </div>
-//         <h1>Kostnad: {totalPrice}</h1>
-//         <Link to='/Payment'>
-//           <button>Betala</button>
-//         </Link>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div>
-//       <h1>Basket</h1>
-//       <p>Basket is empty</p>
-//     </div>
-//   );
-// }
-
-// export default Basket;
-
+import React, { useState, useEffect } from 'react';
 import BasketItem from './BasketItem';
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
 import LocalStorage from './LocalStorage';
 
 function Basket() {
-    const { addToLocalStorage, RemoveFromLocalStorage, DecreaseToLocalStorage, IncreaseToLocalStorage } = LocalStorage();
+    const { DecreaseToLocalStorage, IncreaseToLocalStorage, RemoveFromLocalStorage } = LocalStorage();
     const [basket, setBasket] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -80,38 +27,34 @@ function Basket() {
         calculateTotalPrice();
     }, [basket]);
 
-    // Rest of your code for rendering the basket
+    const canProceedToPayment = basket.length > 0;
 
-
-
-  if (basket.length > 0) {
     return (
-      <div>
-        <h1>Basket</h1>
-        <div className='product-container'>
-          {basket.map((p) => (
-            <BasketItem
-              key={p.name}
-              name={p.name}
-              price={p.price}
-              quantity={p.quantity}
-            />
-          ))}
+        <div>
+            <h1>Basket</h1>
+            {basket.length > 0 ? (
+                <div className='product-container'>
+                    {basket.map((p) => (
+                        <BasketItem
+                            key={p.name}
+                            name={p.name}
+                            price={p.price}
+                            quantity={p.quantity}
+                            IncreaseToLocalStorage={IncreaseToLocalStorage}
+                            DecreaseToLocalStorage={DecreaseToLocalStorage}
+                            RemoveFromLocalStorage={RemoveFromLocalStorage}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <p>Basket is empty</p>
+            )}
+            <h1>Kostnad: {totalPrice}</h1>
+            <Link to='/Payment'>
+                <button disabled={!canProceedToPayment}>Betala</button>
+            </Link>
         </div>
-        <h1>Kostnad: {totalPrice}</h1>
-        <Link to='/Payment'>
-          <button>Betala</button>
-        </Link>
-      </div>
     );
-  }
-
-  return (
-    <div>
-      <h1>Basket</h1>
-      <p>Basket is empty</p>
-    </div>
-  );
 }
 
 export default Basket;

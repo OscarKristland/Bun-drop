@@ -1,26 +1,20 @@
-import React, { Component, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LocalStorage from './LocalStorage';
 
-function BasketItem({name, price, quantity}) {
-    const [item] = useState("");
+function BasketItem({name, price, quantity, id}) {
     const {IncreaseToLocalStorage, DecreaseToLocalStorage, RemoveFromLocalStorage} = LocalStorage();
 
+
     function Increase(){
-        IncreaseToLocalStorage();
+        IncreaseToLocalStorage(name);
     }
 
     function Decrease(){
-        DecreaseToLocalStorage();
+        DecreaseToLocalStorage(name);
     }
 
-    function Remove(){
-        // RemoveFromLocalStorage();
-        console.log('Remove button has been pressed');
-
-        // const updatedBasket = basket.filter((product) => product.id !== id);
-
-        // setBasket(updatedBasket);
-        // localStorage.setItem('basketList', JSON.stringify(updatedBasket));
+    function Remove(name){
+        RemoveFromLocalStorage();
     }
 
     return (
