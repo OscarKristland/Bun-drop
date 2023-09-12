@@ -15,13 +15,13 @@ function Product(){
     }, [productId]);
 
     return (
-        <div className="card">
-            <img src={product.image} alt="Fan" />
+        <div className="product-detail product-background">
             <h1>{product.name}</h1>
-            <em>{product.price}</em>
+            <img src={`/images/${product.image}`} alt="Loading" />
+            <em>{product.price + "kr"}</em>
             <p>{product.description}</p>
             <Link to="/Menu">
-                <button>Back</button>
+                <button className="snygg-knapp">Back</button>
             </Link>
         </div>
     );

@@ -13,7 +13,7 @@ function Basket() {
         if (basketList) {
             setBasket(JSON.parse(basketList));
         }
-    }, []);
+    }, [basket]);
 
     useEffect(() => {
         const calculateTotalPrice = () => {
@@ -31,7 +31,6 @@ function Basket() {
 
     return (
         <div>
-            <h1>Basket</h1>
             {basket.length > 0 ? (
                 <div className='product-container'>
                     {basket.map((p) => (
@@ -49,10 +48,13 @@ function Basket() {
             ) : (
                 <p>Basket is empty</p>
             )}
-            <h1>Kostnad: {totalPrice}</h1>
-            <Link to='/Payment'>
-                <button disabled={!canProceedToPayment}>Betala</button>
-            </Link>
+            <div className='total-cost-box'>
+                <h1>Kostnad: {totalPrice}</h1>
+                <Link to='/Payment'>
+                    <button className="snygg-knapp" disabled={!canProceedToPayment}>Betala</button>
+                </Link>
+            </div>
+            
         </div>
     );
 }

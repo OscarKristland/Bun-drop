@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import LocalStorage from './LocalStorage';
 
-function BasketItem({name, price, quantity, id}) {
+function BasketItem({name, price, quantity}) {
     const {IncreaseToLocalStorage, DecreaseToLocalStorage, RemoveFromLocalStorage} = LocalStorage();
 
 
@@ -18,14 +18,14 @@ function BasketItem({name, price, quantity, id}) {
     }
 
     return (
-        <div className='card'>
+        <div className="product">
             <div>
                 <h3>{name}</h3>
                 <em>{price}</em>
                 <p>Quantity: {quantity}</p>
-                <button onClick={Increase}>INCREASE!!!!</button>
-                <button onClick={Decrease}>DECREASE!!!!</button>
-                <button onClick={Remove}>REMOVE!!</button>
+                <button class="snygg-knapp" onClick={Increase}>Öka</button>
+                <button class="snygg-knapp" onClick={Decrease}>Minska</button>
+                <button class="snygg-knapp" onClick={Remove}>Ta bort</button>
             </div>
         </div>
 

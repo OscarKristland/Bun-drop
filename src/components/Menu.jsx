@@ -19,7 +19,6 @@ function Menu() {
 
     return (
         <div>
-            <h1>Meny!</h1>
             <div className='product-container'>
                 {allProducts?.map((p) => (
                     <ProductCard 

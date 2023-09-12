@@ -11,17 +11,16 @@ function ProductCard({ name, price, id, quantity, image}) {
     addToLocalStorage(name, price, id, quantity);
   }
 
-  return (<div className="card">
+  return (<div className="product">
     <Link to={`/${id}`}>
       <div>
         <h3>{name}</h3>
-        <em>{price}</em>
         <img src={imagePath} alt="empty" />
+        <em>{price + "kr"}</em>
       </div>
-    </Link>      
-    <button
-          value={item} 
-          style={{width:"50px"}}
+    </Link>
+    <button className="snygg-knapp"
+          value={item}
           onClick={AddToBasket}
           >Add!
     </button>

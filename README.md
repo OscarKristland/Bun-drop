@@ -10,6 +10,8 @@
 
 # `Steg 2`Nu behöver du starta en till terminal. `OBS!` I den `nya` terminalen ska du skriva `npm start`.
 
+# Det behövs också köras i terminalen `npm install react-modal` om det är så att det inte sedan tidigare är installerat.
+
 # Detta betyder nu att appen i sig startas och den kommer köras genom en webläsare.
 
 # Nu är det fritt fram att testa.

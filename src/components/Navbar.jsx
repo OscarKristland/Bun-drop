@@ -5,11 +5,11 @@ function Navbar() {
     return (
         <div className='nav-container flex-container nav-text'>
             <Link to="/Menu">
-                <button>Meny</button>
+                <button className="snygg-knapp">Meny</button>
             </Link>
-            Bun Drop
+            <h3 className="site-name">Bun Drop</h3>
             <Link to="/Basket">
-                <button>Varukorg</button>
+                <button className="snygg-knapp">Varukorg</button>
             </Link>
         </div>
     );

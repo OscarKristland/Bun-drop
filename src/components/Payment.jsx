@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import Modal from 'react-modal';
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -13,6 +14,7 @@ function Payment() {
   const [CCV, setCCV] = useState('');
   const [basket, setBasket] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -40,6 +42,17 @@ function Payment() {
   };
   const getReceipt = () => {
     console.log(`Receipt:\nName: ${name}\nAddress: ${adress}\nCity: ${city}\nHousenumber: ${housenumber}`);
+
+    setShowConfirmation(true);
+
+    const minTime = 10 * 60 * 1000;
+    const maxTime = 60 * 60 * 2000;
+    const randomDeliveryTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+
+    setTimeout(() => {
+      setShowConfirmation(false);
+    }, randomDeliveryTime);
+
   };
 
   const isFormValid = name && (paymentMethod === 'Swish' ? phonenumber : Bankcard && CCV);
@@ -67,14 +80,14 @@ function Payment() {
 
 
   return (
-    <div>
-      <form>
+    <div className="payment-box">
+      <form className="payment-form">
         <div>
           <div>
-            <input placeholder='Namn' value={name} onChange={handleSetName} style={name ? {} : { border: '1px solid red' }}></input>
-            <input placeholder='Stad' value={city} onChange={handleSetCity} style={city ? {} : { border: '1px solid red' }}></input>
-            <input placeholder='Adress' value={adress} onChange={handleSetAdress} style={adress ? {} : { border: '1px solid red' }}></input>
-            <input placeholder='Husnummer' value={housenumber} onChange={(e) => {
+            <input className="payment-box-input" placeholder='Namn' value={name} onChange={handleSetName} style={name ? {} : { border: '1px solid red' }}></input>
+            <input className="payment-box-input" placeholder='Stad' value={city} onChange={handleSetCity} style={city ? {} : { border: '1px solid red' }}></input>
+            <input className="payment-box-input" placeholder='Adress' value={adress} onChange={handleSetAdress} style={adress ? {} : { border: '1px solid red' }}></input>
+            <input className="payment-box-input" placeholder='Husnummer' value={housenumber} onChange={(e) => {
                   const numericValue = e.target.value.replace(/\D/g, '');
                   handleSetHouseNumber(numericValue);}} 
                   style={housenumber ? {} : { border: '1px solid red' }} maxLength={5}>
@@ -101,8 +114,8 @@ function Payment() {
           <div>
             {paymentMethod === 'Swish' && (
               <div>
-                {/* Form 1 with phone */}
-                <input placeholder='Telefon' value={phonenumber} onChange={(e) => {
+                {/* phone */}
+                <input className="payment-box-input" placeholder='Telefon' value={phonenumber} onChange={(e) => {
                   const numericValue = e.target.value.replace(/\D/g, '');
                   handleSetPhoneNumber(numericValue);}}
                   maxLength={10}
@@ -112,14 +125,14 @@ function Payment() {
             )}
             {paymentMethod === 'Bankkort' && (
               <div>
-                {/* Form 2 with bankcard */}
-                <input placeholder='Bankkort' value={Bankcard} onChange={(e) => {
+                {/* bankcard */}
+                <input className="payment-box-input" placeholder='Bankkort' value={Bankcard} onChange={(e) => {
                   const numericValue = e.target.value.replace(/\D/g, '');
                   handleSetBankcard(numericValue);}}
                   maxLength={16}
                   style={Bankcard ? {} : { border: '1px solid red' }}>
                 </input>
-                <input placeholder='CCV/CVV' value={CCV} onChange={(e) => {
+                <input className="payment-box-input" placeholder='CCV/CVV' value={CCV} onChange={(e) => {
                   const numericValue = e.target.value.replace(/\D/g, '');
                   handleSetCCV(numericValue);}}
                   maxLength={3}
@@ -129,15 +142,14 @@ function Payment() {
             )}
           </div>
         </div>
-        <button onClick={getReceipt} disabled={!isFormValid}>Slutför Betalning</button>
         <h1>Kostnad: {totalPrice}</h1>
+        <button className="snygg-knapp" onClick={getReceipt} disabled={!isFormValid}>Slutför Betalning</button>
         <Link to="/Basket">
-                <button>Tillbaka till Varukorg</button>
-            </Link>
+                <button className="snygg-knapp">Tillbaka till Varukorg</button>
+        </Link>
       </form>
     </div>
   );
 }
 
 export default Payment;
-
