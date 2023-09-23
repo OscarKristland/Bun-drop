@@ -1,15 +1,23 @@
 # Scrollar du längre ner finns information som är standard i denna sortens projekt.
 
-# Hur som `steg 1`, vad som krävs för att starta upp detta projektet är att först få fram en terminal.
+# `steg 1`
+Vad som krävs för att starta upp detta projektet är att först få fram en terminal.
+I denna ska du skriva:
+# `npm run json-server`
+Nu ska servern vara igång. Detta är viktigt då det är där informationen om de olika produkterna som säljs i denna app finns.
+Är servern inte igång kommer sidorna att laddas men inte fyllas av olika produkter.
 
-# I denna ska du skriva `npm run json-server`.
+# `Steg 2`
+Nu behöver du starta en till terminal. I den nya terminalen ska du skriva:
+# `npm start`
+Detta betyder nu att appen i sig startas och den kommer köras genom en webläsare.
+Nu är det fritt fram att testa.
 
-# Nu ska servern vara igång. Detta är viktigt då det är där informationen om de olika produkterna som säljs i denna app finns.
+### `Ha så kul`
 
-# Är servern inte igång kommer sidorna att laddas men inte fyllas av olika produkter.
 
-# `Steg 2`Nu behöver du starta en till terminal. `OBS!` I den `nya` terminalen ska du skriva `npm start`.
 
+<<<<<<< HEAD
 # Detta betyder nu att appen i sig startas och den kommer köras genom en webläsare.
 
 # Nu är det fritt fram att testa.
@@ -84,3 +92,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+>>>>>>> 607700898e290631beeaa0105b0ccf161c1a95f5
