@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import Modal from 'react-modal';
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -13,8 +11,10 @@ function Payment() {
   const [Bankcard, setBankcard] = useState('');
   const [CCV, setCCV] = useState('');
   const [basket, setBasket] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [totalPrice, setTotalPrice] = useState();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [receiptData, setReceiptData] = useState('');
+  const [randomTime, setRandomTime] = useState ();
 
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -40,25 +40,66 @@ function Payment() {
   const handleSetCCV = (value) => {
     setCCV(value)
   };
-  const getReceipt = () => {
-    console.log(`Receipt:\nName: ${name}\nAddress: ${adress}\nCity: ${city}\nHousenumber: ${housenumber}`);
 
-    setShowConfirmation(true);
+  const getRandomTime = () => {
+    const minutes = Math.floor(Math.random() * (60 - 10 + 1) + 10);
+    const seconds = Math.floor(Math.random() * (61));
+    return `${minutes} minuter och ${seconds} sekunder`;
+  }
 
-    const minTime = 10 * 60 * 1000;
-    const maxTime = 60 * 60 * 2000;
-    const randomDeliveryTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+    let receiptInfo = `Receipt:\nName: ${name}\nAddress: ${adress}\nCity: ${city}\nHousenumber: ${housenumber}`;
+    const randomTime = getRandomTime();
 
-    setTimeout(() => {
-      setShowConfirmation(false);
-    }, randomDeliveryTime);
+    if(name.length <= 1){
+      alert('Namn måste vara minst två bokstäver.');
+      return;
+    }
 
+    if(adress.length <= 2){
+      alert('adress måste vara minst tre bokstäver.');
+      return;
+    }
+    if(city.length <= 2){
+      alert('Stad måste vara minst tre bokstäver.');
+      return;
+    }
+
+    if(housenumber.length <= 0){
+      alert('husnummer måste vara minst en siffra.');
+      return;
+    }
+    
+    if(!paymentMethod){
+      alert('Välj vilken betalningsmetod du vill använda.')
+      return;
+    }
+
+    if (paymentMethod === 'Bankkort') {
+      if (Bankcard.length !== 16) {
+        alert('Bankkortsnummer måste vara 16 siffror.');
+        return;
+      }
+
+      if (CCV.length !== 3) {
+        alert('CCV/CVV måste vara 3 siffror.');
+        return;
+      }
+    }
+    
+    if (paymentMethod === 'Swish') {
+      if (phonenumber.length !== 10) {
+        alert('Telefonnummer måste innehålla 10 siffror.');
+        return;
+      }
+    }
+
+    setReceiptData(receiptInfo);
+    setRandomTime(randomTime);
+    setIsPopupOpen(true);
   };
-
-  const isFormValid = name && (paymentMethod === 'Swish' ? phonenumber : Bankcard && CCV);
-
-  //loading the storage and then showing price for all the items from the basket
-
+ 
   useEffect(() => {
         const basketList = localStorage.getItem("basketList");
         if (basketList) {
@@ -78,11 +119,12 @@ function Payment() {
         calculateTotalPrice();
     }, [basket]);
 
-
   return (
     <div className="payment-box">
-      <form className="payment-form">
+      <form onSubmit={handleSubmit}>
         <div>
+          <h2>Betalningsinformation</h2>
+          <p>Vänligen fyll i alla rödmarkerade fällt.</p>
           <div>
             <input className="payment-box-input" placeholder='Namn' value={name} onChange={handleSetName} style={name ? {} : { border: '1px solid red' }}></input>
             <input className="payment-box-input" placeholder='Stad' value={city} onChange={handleSetCity} style={city ? {} : { border: '1px solid red' }}></input>
@@ -93,6 +135,9 @@ function Payment() {
                   style={housenumber ? {} : { border: '1px solid red' }} maxLength={5}>
             </input>
           </div>
+          {!paymentMethod && (
+            <p style={{ color: 'red' }}>Vänligen välj en betalningsmetod</p>
+          )}
           <label>
             <input
               type="radio"
@@ -143,11 +188,24 @@ function Payment() {
           </div>
         </div>
         <h1>Kostnad: {totalPrice}</h1>
-        <button className="snygg-knapp" onClick={getReceipt} disabled={!isFormValid}>Slutför Betalning</button>
+        <button className="snygg-knapp" type="submit" disabled={!paymentMethod || !name || !city || !adress || !housenumber}>Slutför Betalning</button>
         <Link to="/Basket">
                 <button className="snygg-knapp">Tillbaka till Varukorg</button>
         </Link>
       </form>
+      {/* popup fönster */}
+      <div className="popup" style={{ display: isPopupOpen ? 'block' : 'none' }}>
+        <div className="popup-content">
+          <h2>
+            Tack för din beställning {name}! 
+            Det väntas ta {getRandomTime(randomTime)}. 
+            Leveransen sker till adressen {adress + " " + housenumber}, {city}.
+          </h2>
+          <Link to="/Menu">
+                <button className="snygg-knapp" onClick={() => setIsPopupOpen(false)}>Stäng</button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

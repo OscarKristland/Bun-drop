@@ -46,15 +46,21 @@ function Basket() {
                     ))}
                 </div>
             ) : (
-                <p>Basket is empty</p>
+                <h2 className='greeting'>Basket is empty</h2>
             )}
+            {basket.length > 0 && (
             <div className='total-cost-box'>
                 <h1>Kostnad: {totalPrice}</h1>
                 <Link to='/Payment'>
                     <button className="snygg-knapp" disabled={!canProceedToPayment}>Betala</button>
                 </Link>
             </div>
-            
+            )}
+            <div className='total-cost-box'>
+                <Link to="/Menu">
+                    <button className="snygg-knapp">Tillbaka till menyn</button>
+                </Link>
+            </div>
         </div>
     );
 }

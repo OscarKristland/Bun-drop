@@ -34,11 +34,10 @@ function LocalStorage(){
         return basket;
     }
 
-    //Kan för tillfället trycka minus hur många gånger som helst, det tas ej bort heller om det blir 0 eller mindre. SKA FIXAS.
     function DecreaseToLocalStorage(name){
         console.log("Decrease button has been pressed");
         let basket = JSON.parse(localStorage.getItem("basketList")) || [];
-        console.log(name);
+
 
         const existingProduct = basket.find((product) => product.name === name);
         if (existingProduct) {

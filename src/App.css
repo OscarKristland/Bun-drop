@@ -5,6 +5,29 @@ body {
   background-attachment: fixed;
 }
 
+/* <------------------------------------ popup fönster ------------------------------------>*/
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: antiquewhite;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 150px;
+  margin-right: 100px;
+  margin-left: 100px;
+}
+/* popup fönster*/
+
 /* <------------------------------------ payment-box ------------------------------------>*/
 
 .payment-box form {
@@ -12,14 +35,16 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  max-height: 400px;
+  max-height: auto;
+  max-width: auto;
+  text-align: center;
 }
 
 .payment-box {
   background-color: antiquewhite;
   padding: 20px;
   border-radius: 5px;
-  margin: 100px auto;
+  margin: 150px auto;
   max-width: 400px;
 }
 
@@ -27,17 +52,13 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 300px;
+  margin: 5px 0;
   align-items: end;
 }
 
-.payment-box input[type="radio"] {
-  margin-left: 10px; /* Lägger till en vänstermarginal på knappen */
-}
-
-.payment-box button {
-  margin-left: 10px;
-  /* Lägger till en vänstermarginal på knappen */
+.payment-box label {
+  margin-right: 10px;
+  align-items: center;
 }
 
 /* payment-box */
@@ -192,6 +213,13 @@ img {
   color: #222;
   border-color: #222;
 }
+
+.snygg-knapp:disabled {
+  opacity: 0.5;
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 /* Knappar */
 
 
@@ -216,6 +244,8 @@ img {
 
 /* Footer */
 
+
+/* <------------------------------------ Greeting ------------------------------------>*/
 
 .greeting {
   background-color: antiquewhite;
